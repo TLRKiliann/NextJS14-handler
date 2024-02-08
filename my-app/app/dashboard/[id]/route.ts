@@ -15,5 +15,4 @@ export async function PATCH(request: Request, {params}: {params: {id: string}}) 
     )
     comments[index].name = name;
     return Response.json(comments[index])
-}
-
+};
