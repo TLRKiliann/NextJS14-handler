@@ -1,7 +1,8 @@
 "use client";
 
 import React, {useState, useEffect } from 'react'
-import UpdateComp from '../components/UpdateComp';
+import UpdateComp from '@/app/components/UpdateComp';
+import styles from '@/app/styles/comments.module.css';
 
 type CommentsProps = {
     id: number;
@@ -83,22 +84,36 @@ export default function Comments() {
     }
 
     return (
-        <>
+        <main className={styles.maincrud}>
+
+            <h1 className={styles.title}>All users from DB :</h1>            
+            
+
             {data.map((d: CommentsProps) => (
-                <div key={d.id}>
-                    <p>{d.id}</p>
-                    <p>{d.name}</p>
+                <div key={d.id} className={styles.divdb}>
+                    <p>ID: {d.id}</p>
+                    <p>NAME: {d.name}</p>
                 </div>
             ))}
 
-            <form onSubmit={(event) => handleSubmit(event, user)}>
+            <hr />
+
+            <form onSubmit={(event) => handleSubmit(event, user)} className={styles.formone}>
                 <h2>Create user</h2>
-                <input type="text" value={user} onChange={(event) => handleChange(event)}/>
-                <button type="submit">Enter</button>
+                <input 
+                    type="text" 
+                    value={user} 
+                    onChange={(event) => handleChange(event)} 
+                    placeholder="enter name"
+                    className={styles.input}
+                />
+                <button type="submit" className={styles.button}>Enter</button>
             </form>
         
+            <hr />
+
             {data.map((u: CommentsProps) => (
-                <form key={u.id} onSubmit={(event) => handleUpdateSubmit(event, u.id)}>
+                <form key={u.id} onSubmit={(event) => handleUpdateSubmit(event, u.id)} className={styles.formsec}>
                     <h2>Update user {u.name}</h2>
                     <UpdateComp
                         id={u.id}
@@ -109,6 +124,6 @@ export default function Comments() {
                     />
                 </form>
             ))}
-        </>
+        </main>
     )
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '@/app/styles/UpdateComp.module.css';
 
 type UpdateProps = {
     id: number;
@@ -20,26 +21,30 @@ export default function UpdateComp({id, name, newUser, handleUpdateChange, handl
         <div key={id}>
 
             {showUser ? (
-                <div>
+                <div className={styles.update}>
+
                     <input 
                         type="text" 
                         value={newUser}
                         onChange={(event) => handleUpdateChange(event, id)}
                         placeholder={name}
+                        className={styles.input}
                     />
-                    <button type="submit">Update</button> 
+                    <button type="submit" className={styles.button}>Update</button> 
 
                 </div>
                 ) : null
             }
 
-            <button type="button" onClick={handleShowHideUser}>
-                {showUser ? "Hide" : "show"}
-            </button>
-       
-            <button type="button" onClick={() => handleDelete(id)}>
-                Delete
-            </button>
+            <div className={styles.divbtn}>
+                <button type="button" onClick={handleShowHideUser} className={styles.button}>
+                    {showUser ? "Hide" : "show"}
+                </button>
+        
+                <button type="button" onClick={() => handleDelete(id)} className={styles.button}>
+                    Delete
+                </button>
+            </div>
 
         </div>
     )
