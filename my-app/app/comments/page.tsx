@@ -24,14 +24,15 @@ export default function Comments() {
         return () => console.log("clean-up !");
     }, []);
 
+    // create new user
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event?.target.value)
         setUser(event.target.value);
     };
 
-    const handleUpdate = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-        const findByName = data.find((d: CommentsProps) => d.name === name);
-        
+    // update (to be improve)
+    const handleUpdateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUser(event.target.value);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, user: string) => {
@@ -47,6 +48,7 @@ export default function Comments() {
             }
         });
         console.log(enterData);
+        setUser("");
     }
 
     const handleUpdateSubmit = async (event: React.FormEvent<HTMLFormElement>, id: number) => {
@@ -79,14 +81,18 @@ export default function Comments() {
                 <button type="submit">Enter</button>
             </form>
         
-            {data.map((d: CommentsProps) => (
-                <form key={d.id} onSubmit={(event) => handleUpdateSubmit(event, d.id)}>
-                    <h2>Update user</h2>
-                    <input type="text" value={d.name} onChange={(event) => handleUpdate(event, d.name)}/>
+            {data.map((u: CommentsProps) => (
+                <form key={u.id} onSubmit={(event) => handleUpdateSubmit(event, u.id)}>
+                    <h2>Update user {u.name}</h2>
+                    <input 
+                        type="text" 
+                        value={user} 
+                        onChange={(event) => handleUpdateChange(event)}
+                        placeholder={u.name}
+                    />
                     <button type="submit">Update</button>
                 </form>
             ))}
-
         </>
     )
 }
