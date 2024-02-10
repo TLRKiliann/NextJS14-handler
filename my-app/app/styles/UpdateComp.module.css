@@ -1,0 +1,26 @@
+.update {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input {
+    width: 40%;
+    margin: auto;
+    padding: 5px 10px;
+}
+
+.divbtn {
+    display: flex;
+}
+
+.button {
+    width: 30%;
+    font-size: 1.0rem;
+    font-weight: bold;
+    background-color: royalblue;
+    border: none;
+    border-radius: 3px;
+    margin: 10px auto;
+    padding: 8px 0px;
+}

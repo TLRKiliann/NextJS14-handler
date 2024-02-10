@@ -1,0 +1,46 @@
+.title {
+    text-align: center;
+    font-size: 2rem;
+
+}
+
+.divdb {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.formone {
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    
+    margin: 10px auto; 
+}
+
+.formsec {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+}
+
+.input {
+    width: 80%;
+    margin: 10px auto;
+    padding: 4px 10px;
+}
+
+.button {
+    width: 30%;
+    font-size: 1.0rem;
+    font-weight: bold;
+    background-color: royalblue;
+    border: none;
+    border-radius: 3px;
+    margin: 10px auto;
+    padding: 8px 0px;
+}
