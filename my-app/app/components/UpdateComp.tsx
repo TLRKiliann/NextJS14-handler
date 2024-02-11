@@ -5,7 +5,7 @@ type UpdateProps = {
     id: number;
     name: string;
     newUser: string;
-    handleUpdateChange: (event: React.ChangeEvent<HTMLInputElement>, id: number) => void;
+    handleUpdateChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleDelete: (id: number) => void;
 };
 
@@ -26,7 +26,7 @@ export default function UpdateComp({id, name, newUser, handleUpdateChange, handl
                     <input 
                         type="text" 
                         value={newUser}
-                        onChange={(event) => handleUpdateChange(event, id)}
+                        onChange={(event) => handleUpdateChange(event)}
                         placeholder={name}
                         className={styles.input}
                     />
