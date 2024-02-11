@@ -3,14 +3,17 @@ import type { CommentsProps } from "./definitions";
 export const comments: CommentsProps[] = [
     {
         id: 1,
-        name: "Douglas"
+        name: "Douglas",
+        display: false
     },
     {
         id: 2,
-        name: "Jacklyne"
+        name: "Jacklyne",
+        display: false
     },
     {
         id: 3,
-        name: "Javier"
+        name: "Javier",
+        display: false
     }
 ];
