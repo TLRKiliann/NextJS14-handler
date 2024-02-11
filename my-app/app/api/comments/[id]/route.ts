@@ -18,7 +18,6 @@ export async function PATCH(request: Request, { params }: {params: {id: string}}
 }
 
 export  async function DELETE(request: Request, {params} : {params: {id: string}}) {
-    const body = await request.json();
     const index = comments.findIndex(
         (comment) => comment.id === parseInt(params.id)
     )
