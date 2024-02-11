@@ -1,21 +1,16 @@
 "use client";
 
-import React, {useState, useEffect, ComponentProps } from 'react'
+import type { CommentsProps } from '../lib/definitions';
+import React, {useState, useEffect } from 'react'
 import UpdateComp from '@/app/components/UpdateComp';
 import styles from '@/app/styles/comments.module.css';
-
-type CommentsProps = {
-    id: number;
-    name: string;
-}
 
 export default function Comments() {
 
     const [data, setData] = useState<CommentsProps[]>([])
 
     const [newData, setNewData] = useState<CommentsProps[]>([]);
-    console.log(newData, "newData");
-
+    
     const [user, setUser] = useState<string>("");
 
     const [newUser, setNewUser] = useState<string>("");
@@ -38,6 +33,15 @@ export default function Comments() {
         callerNewData();
         return () => console.log("Clean-up (2)")
     }, [data]);
+
+    const [showUser, setShowUser] = useState<boolean>(false);
+
+    const handleShowHideUser = (id: number): void => {
+        const findById = newData.find((d: CommentsProps) => d.id === id)
+        if (findById) {
+            setNewData(newData.map((d: CommentsProps) => d.id === id ? {...d, id: findById.id, name: d.name, display: !d.display} : d))
+        }
+    };
 
     // create new user
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -71,7 +75,7 @@ export default function Comments() {
         event.preventDefault();
         const findById = data.find((d: CommentsProps) => d.id === id);
         if (findById) {
-            setNewData(newData.map((d: CommentsProps) => d.id === findById.id ? {...d, id: id, name: newUser} : d));
+            setNewData(newData.map((d: CommentsProps) => d.id === findById.id ? {...d, id: id, name: newUser, display: !d.display} : d));
             try {
                 const updateName = await fetch(`/api/comments/${id}`, {
                     method: "PATCH",
@@ -84,6 +88,7 @@ export default function Comments() {
                     }
                 });
                 console.log(updateName);
+                setShowUser(!showUser); 
                 setNewUser("");
             } catch (error) {
                 console.log(error);
@@ -152,7 +157,9 @@ export default function Comments() {
                     <UpdateComp
                         id={u.id}
                         name={u.name}
+                        display={u.display}
                         newUser={newUser}
+                        handleShowHideUser={(id) => handleShowHideUser(id)}
                         handleUpdateChange={(event) => handleUpdateChange(event)}
                         handleDelete={(id) => handleDelete(id)}
                     />
