@@ -1,31 +1,53 @@
+.maincrud {
+    background: linear-gradient(30deg, #333, #000);
+    padding-bottom: 20px;
+}
+
 .title {
+    padding: 20px 0px;
     text-align: center;
     font-size: 2rem;
-
 }
 
 .divdb {
-    width: 300px;
+    width: 400px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    margin: 10px auto;
+    justify-content: space-around;
+    margin: 20px auto;
+    padding: 20px;
+    background: #444;
+    border: none;
+    border-radius: 7px;
+    box-shadow: inset 0 0 10px #000;
 }
 
 .formone {
-    width: 300px;
-
+    width: 400px;
     display: flex;
     flex-direction: column;
-    
-    margin: 10px auto; 
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background: #444;
+    border: none;
+    border-radius: 7px;
+    box-shadow: inset 0 0 10px #000;
 }
 
 .formsec {
-    width: 300px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding: 20px;
+    background: #444;
+    border: none;
+    border-radius: 7px;
+    box-shadow: inset 0 0 10px #000;
 }
 
 .input {
