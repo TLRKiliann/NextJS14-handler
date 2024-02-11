@@ -41,18 +41,18 @@ export default function Comments() {
 
     // create new user
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        console.log(event?.target.value)
-        setUser(event.target.value);
+        const targetUser = (event.target.value)
+        setUser(targetUser);
     };
 
     // update (to be improve)
     const handleUpdateChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const target = event.target.value;
-        setNewUser(target);
+        const targetNewUsr = event.target.value;
+        setNewUser(targetNewUsr);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, user: string) => {
-        event?.preventDefault()
+        event.preventDefault()
         const enterData = await fetch('/api/dashboard/users', {
             method: "POST",
             body: JSON.stringify({
@@ -95,16 +95,26 @@ export default function Comments() {
     }
 
     const handleDelete = async (id: number) => {
-        const deleteUser = await fetch(`/api/comments/${id}`, {
-            method: "DELETE",
-            body: JSON.stringify({
-                id: id,
-            }),
-            headers: {
-                "Content-Type": "application/json"
+        const findById = data.find((d: CommentsProps) => d.id === id);
+        if (findById) {
+            setNewData(newData.filter((d: CommentsProps) => d.id !== id))
+            try {
+                const deleteUser = await fetch(`/api/comments/${id}`, {
+                    method: "DELETE",
+                    body: JSON.stringify({
+                        id: id,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                console.log(deleteUser);
+            } catch (error) {
+                throw new Error("Error: error to delete user by id")
             }
-        });
-        console.log(deleteUser);
+        } else {
+            return undefined;
+        }
     }
 
     return (
