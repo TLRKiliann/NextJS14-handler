@@ -4,23 +4,18 @@ import styles from '@/app/styles/UpdateComp.module.css';
 type UpdateProps = {
     id: number;
     name: string;
+    display: boolean;
     newUser: string;
     handleUpdateChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleDelete: (id: number) => void;
+    handleShowHideUser: (id: number) => void;
 };
 
-export default function UpdateComp({id, name, newUser, handleUpdateChange, handleDelete}: UpdateProps) {
-
-    const [showUser, setShowUser] = useState<boolean>(false);
-
-    const handleShowHideUser = (): void => {
-        setShowUser(!showUser)
-    };
-
+export default function UpdateComp({id, name, newUser, display, handleShowHideUser, handleUpdateChange, handleDelete}: UpdateProps) {
     return (
         <div key={id}>
 
-            {showUser ? (
+            {display ? (
                 <div className={styles.update}>
 
                     <input 
@@ -37,8 +32,8 @@ export default function UpdateComp({id, name, newUser, handleUpdateChange, handl
             }
 
             <div className={styles.divbtn}>
-                <button type="button" onClick={handleShowHideUser} className={styles.button}>
-                    {showUser ? "Hide" : "show"}
+                <button type="button" onClick={() => handleShowHideUser(id)} className={styles.button}>
+                    {display ? "Hide" : "show"}
                 </button>
         
                 <button type="button" onClick={() => handleDelete(id)} className={styles.button}>
