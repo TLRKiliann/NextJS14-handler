@@ -2,6 +2,9 @@
 
 # Run
 
+`$ git clone https://...`
+`$ cd my-app`
+`$ pnpm install`
 `$ pnpm run dev`
 
 # Resume
@@ -9,6 +12,7 @@
 This basic tutorial explains how to use api calls with route-handler of NextJS14.
 
 You can play with parameters of headers, cookies, request.url, searchParams, etc...
+with Thunder Client or with your browser to see results with url or in the comments page.tsx.
 
 Some files required Thunder Client (in vscode) to be tested.
 
@@ -16,13 +20,18 @@ Some files required Thunder Client (in vscode) to be tested.
 
 ### CRUD API
 
-- GET by id, PATCH & DELETE
+- GET by params:id, PATCH & DELETE
 Location file: /api/comments/[id]/route.ts
 
-- GET & POST
+- GET(all data) & POST
 Location file: /api/dashboard/users/route.ts
 
 ### Headers 
+
+`import { headers } from 'next/headers';`
+`import { NextRequest } from "next/server";`
+
+- NextRequest
 
 From server request, header will be returned with GET method.
 
@@ -37,7 +46,21 @@ GET => http://localhost:3000/api/test/headers
 
 Location file: /api/test/headers/route.ts
 
+```
+    (into the response)
+    headers: {
+        "Content-Type": "text/html",
+    }
+``` 
+
 ### Cookies
+
+`import { cookies } from 'next/headers';`
+`import { NextRequest } from "next/server";`
+
+`request.cookies.get("something")`
+
+- NextRequest
 
 - settings
 cookies().set("paramter", "value")
@@ -45,15 +68,43 @@ cookies().set("paramter", "value")
 - return value of cookie (browser > localstorage > cookie)
 cookies().get("paramter")
 
+```
+    (into the response)
+    headers: {
+        "Content-Type": "text/html",
+        "Set-Cookie": "theme=dark"
+    }
+``` 
+
 Location file: /api/test/cookies/route.ts
 
 ### Redirect
+
+`import { redirect } from 'next/navigation';`
 
 /api/test/redirect/
 
 /api/test/redirect/[id]
 
-Replace id by 4 to figure out redirect.
+Replace id by 4 to be redirect to /comments.
+
+## Request parameters
+
+`import { NextRequest } from "next/server";`
+
+- query
+- NextRequest
+- request.nextUrl.searchParams
+
+2 files required:
+- Location file: /api/test/request/route.ts
+- Location file: /api/test/request/[id]/route.ts
+
+Replace id by 2 in the url:
+
+localhost:3000/api/test/request/2
+
+It returns automatically the number with properties & values of data.
 
 ---
 
@@ -63,5 +114,4 @@ Replace id by 4 to figure out redirect.
 
 Location file: /comments/page.tsx
 
-You can use API from page.tsx to make api calls.
-(useQuery is required to make this request).
+You can make API calls from this file.
