@@ -5,14 +5,14 @@ import React, {useState, useEffect } from 'react'
 import UpdateComp from '@/app/components/UpdateComp';
 import styles from '@/app/styles/comments.module.css';
 
+export const dynamic = "force-dynamic";
+
 export default function Comments() {
 
     const [data, setData] = useState<CommentsProps[]>([])
-
     const [newData, setNewData] = useState<CommentsProps[]>([]);
-    
-    const [user, setUser] = useState<string>("");
 
+    const [user, setUser] = useState<string>("");
     const [newUser, setNewUser] = useState<string>("");
 
     useEffect(() => {
@@ -57,11 +57,14 @@ export default function Comments() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, user: string) => {
         event.preventDefault()
+        setNewData([...newData, {id: newData.length + 4, name: user, display: false}])
+ 
         const enterData = await fetch('/api/dashboard/users', {
             method: "POST",
             body: JSON.stringify({
                 id: data.length + 1,
-                name: user
+                name: user,
+                display: false
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -128,7 +131,7 @@ export default function Comments() {
             <h1 className={styles.title}>All users from DB :</h1>            
             
 
-            {data.map((d: CommentsProps) => (
+            {newData.map((d: CommentsProps) => (
                 <div key={d.id} className={styles.divdb}>
                     <p>ID: {d.id}</p>
                     <p>NAME: {d.name}</p>

@@ -1,4 +1,5 @@
 import { comments } from '@/app/lib/data';
+import { CommentsProps } from '@/app/lib/definitions';
 
 export const dynamic = 'force-dynamic'; // defaults to auto
 
@@ -8,10 +9,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-    const comment = await request.json();
-    const newComment = {
+    const comment: CommentsProps = await request.json();
+    const newComment: CommentsProps = {
         id: comments.length + 1,
         name: comment.name,
+        display: false
     };
     comments.push(newComment);
     return new Response(JSON.stringify(newComment), {
