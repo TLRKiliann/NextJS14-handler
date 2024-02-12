@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Route-Handler
 
-## Getting Started
+# Run
 
-First, run the development server:
+`$ pnpm run dev`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Resume
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This basic tutorial explains how to use api calls with route-handler of NextJS14.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can play with parameters of headers, cookies, request.url, searchParams, etc...
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Some files required Thunder Client (in vscode) to be tested.
 
-## Learn More
+## API
 
-To learn more about Next.js, take a look at the following resources:
+### CRUD API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- GET by id, PATCH & DELETE
+Location file: /api/comments/[id]/route.ts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- GET & POST
+Location file: /api/dashboard/users/route.ts
 
-## Deploy on Vercel
+### Headers 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+From server request, header will be returned with GET method.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Add one parameter in headers (http-headers) of Thunder Client for the GET request with:
+
+GET => http://localhost:3000/api/test/headers
+
+(Accept)
+(User-Agent)
+- Authorization (parameter)
+- Bearer 12345 (value)
+
+Location file: /api/test/headers/route.ts
+
+### Cookies
+
+- settings
+cookies().set("paramter", "value")
+
+- return value of cookie (browser > localstorage > cookie)
+cookies().get("paramter")
+
+Location file: /api/test/cookies/route.ts
+
+### Redirect
+
+/api/test/redirect/
+
+/api/test/redirect/[id]
+
+Replace id by 4 to figure out redirect.
+
+---
+
+## Page (route)
+
+### CRUD
+
+Location file: /comments/page.tsx
+
+You can use API from page.tsx to make api calls.
+(useQuery is required to make this request).
