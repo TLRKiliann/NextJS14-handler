@@ -2,6 +2,7 @@
 
 import type { CommentsProps } from '../lib/definitions';
 import React, {useState, useEffect } from 'react'
+import Link from 'next/link';
 import UpdateComp from '@/app/components/UpdateComp';
 import styles from '@/app/styles/comments.module.css';
 
@@ -168,6 +169,19 @@ export default function Comments() {
                     />
                 </form>
             ))}
+
+            <div className={styles.lastdiv}>
+    
+                <h3>Link to reach by Id:</h3>
+    
+                {newData.map((comment: CommentsProps) => (
+                    <li key={comment.id}>
+                        <Link href={`/comments/${comment.id}`}>{comment.name}</Link>
+                    </li>
+                ))}
+
+            </div>
+
         </main>
     )
 }
