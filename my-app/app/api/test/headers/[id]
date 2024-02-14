@@ -1,7 +1,0 @@
-import type { CommentsProps } from '@/app/lib/definitions';
-import { comments } from '@/app/lib/data';
-
-export async function GET(request: Request, {params}: {params: {id: string}}) {
-    const findById = comments.find((comment: CommentsProps) => comment.id === parseInt(params.id));
-    return Response.json(findById);
-}

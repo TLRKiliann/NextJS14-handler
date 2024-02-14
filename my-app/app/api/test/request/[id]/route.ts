@@ -1,5 +1,5 @@
+import type { CommentsProps } from "@/app/lib/definitions";
 import { comments } from "@/app/lib/data";
-import { CommentsProps } from "@/app/lib/definitions";
 import { redirect } from "next/navigation";
 
 // http://localhost:3000/api/test/request
