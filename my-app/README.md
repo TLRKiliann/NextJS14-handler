@@ -23,7 +23,7 @@ Some files required Thunder Client (in vscode) to be tested.
 - GET by params:id, PATCH & DELETE
 Location file: /api/comments/[id]/route.ts
 
-- GET(all data) & POST
+- GET(with params.id) & POST
 Location file: /api/dashboard/users/route.ts
 
 ### Headers 
@@ -35,7 +35,7 @@ Location file: /api/dashboard/users/route.ts
 
 From server request, header will be returned with GET method.
 
-Add one parameter in headers (http-headers) of Thunder Client for the GET request with:
+Add one parameter in headers (http-headers) of `Thunder Client` for the GET request with:
 
 GET => http://localhost:3000/api/test/headers
 
@@ -47,7 +47,7 @@ GET => http://localhost:3000/api/test/headers
 Location file: /api/test/headers/route.ts
 
 ```
-    (into the response)
+    (result of response)
     headers: {
         "Content-Type": "text/html",
     }
@@ -104,7 +104,20 @@ Replace id by 2 in the url:
 
 localhost:3000/api/test/request/2
 
-It returns automatically the number with properties & values of data.
+It returns automatically url with parameter.
+
+```
+import { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+    const searchParams = request.nextUrl.searchParams;
+    const query = searchParams.get("query");
+    const filterComment = query 
+        ? comments.filter((comment: CommentsProps) = comment.text.includes(query))
+        : comments;
+    return Response.json(filterComment);
+}
+```
 
 ---
 
