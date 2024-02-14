@@ -28,6 +28,8 @@ Location file: /api/dashboard/users/route.ts
 
 ### Headers 
 
+Normaly used for authorization.
+
 `import { headers } from 'next/headers';`
 `import { NextRequest } from "next/server";`
 
@@ -80,6 +82,8 @@ Location file: /api/test/cookies/route.ts
 
 ### Redirect
 
+To manage error or authentication.
+
 `import { redirect } from 'next/navigation';`
 
 /api/test/redirect/
@@ -90,11 +94,14 @@ Replace id by 4 to be redirect to /comments.
 
 ## Request parameters
 
+Usefull to reach url with parameter dynamically without return value of parameter.
+
 `import { NextRequest } from "next/server";`
 
-- query
 - NextRequest
+- query
 - request.nextUrl.searchParams
+- filter
 
 2 files required:
 - Location file: /api/test/request/route.ts
@@ -127,4 +134,4 @@ export async function GET(request: NextRequest) {
 
 Location file: /comments/page.tsx
 
-You can make API calls from this file.
+Some examples of API calls.
